@@ -4,6 +4,7 @@ import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.TelegramBotsApi
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException
 
+
 fun main(args: Array<String>) {
     ApiContextInitializer.init()
 
@@ -15,3 +16,4 @@ fun main(args: Array<String>) {
         e.printStackTrace()
     }
 }
+

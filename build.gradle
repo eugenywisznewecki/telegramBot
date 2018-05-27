@@ -9,14 +9,13 @@ buildscript {
     }
 }
 
-plugins {
-    id 'java'
-}
+
+
 
 
 group 'bel.ink'
 version '1.0-SNAPSHOT'
-
+apply plugin: 'java'
 apply plugin: 'kotlin'
 
 sourceCompatibility = 1.8
@@ -38,5 +37,18 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+// Include dependent libraries in archive.
+jar {
+
+    manifest {
+        attributes 'Main-Class': 'bel.ink.telegrambot.MainKt'
+    }
+
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 

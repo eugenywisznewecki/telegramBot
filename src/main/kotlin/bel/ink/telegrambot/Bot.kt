@@ -1,22 +1,24 @@
 package bel.ink.telegrambot
 
+import org.telegram.telegrambots.ApiContextInitializer
+import org.telegram.telegrambots.TelegramBotsApi
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.exceptions.TelegramApiException
+import org.telegram.telegrambots.exceptions.TelegramApiRequestException
 
 class Bot : TelegramLongPollingBot() {
 
 
-    override fun getBotToken() = "331869684:AAEa48ZTt139jFon0UPG5ddleFwwBqzBbs0"
+    override fun getBotToken() = TOKEN
 
     override fun getBotUsername() = "TOP30_bot"
 
-    override fun onUpdateReceived(update: Update) {
+    override fun onUpdateReceived(update: Update?) {
 
-        val message = update.message.text
-        sendMsq(update.message.chatId.toString(), message)
-
+        val message = update?.message?.text
+        message?.let {  sendMsq(update.message?.chatId.toString(), message)  }
 
     }
 
@@ -33,4 +35,6 @@ class Bot : TelegramLongPollingBot() {
         } catch (e: TelegramApiException) {
         }
     }
+
+
 }
